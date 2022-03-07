@@ -1,0 +1,85 @@
+<div class="page">
+  <div class="center">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <h2>Signup</h2>
+      <div class="container">
+        <div class="row">
+          <!-- column - 1 -->
+          <div class="col-md-6 col-12">
+            <div class="inp_row">
+              <label for="fname">First name *</label>
+              <input
+                type="text"
+                formControlName="fname"
+                id="fname"
+                placeholder="e.g: John"
+                required
+              />
+            </div>
+            <div class="inp_row">
+              <label for="lname">Last name *</label>
+              <input
+                type="text"
+                formControlName="lname"
+                id="lname"
+                placeholder="e.g: Doe"
+                required
+              />
+            </div>
+            <div class="inp_row">
+              <label for="age">Age *</label>
+              <input
+                type="text"
+                formControlName="age"
+                id="age"
+                placeholder="age"
+                required
+              />
+            </div>
+          </div>
+          <!-- column - 2 -->
+          <div class="col-md-6 col-12">
+            <div class="inp_row">
+              <label for="phone">Phone</label>
+              <input
+                type="number"
+                minlength="10"
+                min="0"
+                formControlName="phone"
+                id="phone"
+                placeholder="phone"
+              />
+            </div>
+            <div class="inp_row">
+              <label for="email">Email *</label>
+              <input
+                type="text"
+                formControlName="email"
+                id="email"
+                placeholder="e.g: john@abc.com"
+                required
+              />
+            </div>
+            <div class="inp_row">
+              <label for="password">Password *</label>
+              <input
+                type="text"
+                formControlName="password"
+                id="password"
+                placeholder="password"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="inp_row">
+          <button type="submit">Signup</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="goto">
+      <p>Already have an account? <a routerLink="../login">Login</a></p>
+    </div>
+  </div>
+</div>

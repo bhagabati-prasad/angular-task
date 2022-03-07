@@ -1,0 +1,34 @@
+section {
+  min-height: 100vh;
+  background-color: #222;
+}
+
+.profile_img {
+  display: flex;
+  justify-content: center;
+  border-right: 2px dashed #999;
+}
+
+.profile_img img {
+  height: 400px;
+  border-radius: 7px;
+  box-shadow: 0 0 16px #000;
+}
+
+.profile_content {
+  padding: 1rem 2rem;
+}
+
+.content_row {
+  margin-bottom: 1.4rem;
+}
+
+.content_row p {
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.content_row h4 {
+  font-size: 1.2rem;
+  color: #ffdd00;
+}
