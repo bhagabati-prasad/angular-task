@@ -4,7 +4,7 @@ const { userController } = require('../controllers');
 const auth = require('../middleware/auth');
 
 // @route  GET: /api/user/isLoggedIn
-router.get('/isLoggedIn', auth, userController.isLoggedIn);
+router.post('/isLoggedIn', auth, userController.isLoggedIn);
 
 // @route  POST: /api/user/signup
 router.post('/signup', userController.signup);

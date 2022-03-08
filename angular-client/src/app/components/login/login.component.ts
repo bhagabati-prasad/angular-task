@@ -1,38 +1,44 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
+  loginForm!: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     if (this.auth.isLoggedIn()) {
       this.router.navigate(['profile']);
     }
+
+    this.loginForm = this.formBuilder.group({
+      email: '',
+      password: '',
+    });
   }
 
   onSubmit(): void {
-    console.log(this.loginForm.value);
-    if (this.loginForm.valid) {
-      this.auth.login(this.loginForm.value).subscribe(
-        (result) => {
-          this.router.navigate(['profile']);
-        },
-        (err: Error) => {
-          alert(err.message);
-        }
-      );
-    }
+    this.http
+      .post(
+        'http://localhost:4000/api/user/login',
+        this.loginForm.getRawValue()
+      )
+      .subscribe((res: any) => {
+        console.log(res);
+        localStorage.setItem('access-token', res.token);
+        this.router.navigate(['profile']);
+      });
   }
 }

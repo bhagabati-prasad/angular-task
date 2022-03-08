@@ -4,7 +4,7 @@ const { decodeToken } = require('../utils/authToken');
 module.exports = async (req, res, next) => {
   try {
     // const token = req.cookies['access-token'];
-    const token = req.headers['access-token'];
+    const token = req.body['access-token'];
     if (token && !!token) {
       const payload = decodeToken(token);
       if (payload && !!payload) {
