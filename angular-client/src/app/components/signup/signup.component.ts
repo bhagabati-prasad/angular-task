@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private auth: AuthService
   ) {}
@@ -35,15 +33,10 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.http
-      .post(
-        'http://localhost:4000/api/user/signup',
-        this.signupForm.getRawValue()
-      )
-      .subscribe((res: any) => {
-        console.log(res);
-        localStorage.setItem('access-token', res.token);
-        this.router.navigate(['profile']);
-      });
+    this.auth.signup(this.signupForm.getRawValue()).subscribe((res: any) => {
+      console.log(res);
+      localStorage.setItem('access-token', res.token);
+      this.router.navigate(['profile']);
+    });
   }
 }

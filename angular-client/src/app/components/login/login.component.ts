@@ -30,15 +30,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.http
-      .post(
-        'http://localhost:4000/api/user/login',
-        this.loginForm.getRawValue()
-      )
-      .subscribe((res: any) => {
-        console.log(res);
-        localStorage.setItem('access-token', res.token);
-        this.router.navigate(['profile']);
-      });
+    this.auth.login(this.loginForm.getRawValue()).subscribe((res: any) => {
+      console.log({ res });
+      localStorage.setItem('access-token', res.token);
+      this.router.navigate(['profile']);
+    });
   }
 }

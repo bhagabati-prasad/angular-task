@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  proxy = environment.proxy;
+
   fname!: String;
   lname!: String;
   email!: String;
@@ -23,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .post('http://localhost:4000/api/user/isLoggedIn', {
+      .post(`${this.proxy}/api/user/isLoggedIn`, {
         'access-token': this.auth.getToken(),
       })
       .subscribe((res: any) => {
